@@ -182,22 +182,28 @@ var Clock = (function () {
 
     }
 
+    var setClock = function () {
+        var now = new Date();
+        var h = now.getHours();
+        var m = now.getMinutes();
+        var s = now.getSeconds();
+
+        h = twelveHours(h);
+        m = formatTime(m);
+        s = formatTime(s);
+
+        var html = '<span class="clock__display">' + h + ':' + m + '</span><span class="clock__date">';
+        
+        $('.clock .center').html(html);
+    }
+
     module.init = function () {
+
+        setClock();
 
         interval = setInterval(function () {
 
-            var now = new Date();
-            var h = now.getHours();
-            var m = now.getMinutes();
-            var s = now.getSeconds();
-
-            h = twelveHours(h);
-            m = formatTime(m);
-            s = formatTime(s);
-
-            var html = '<span class="clock__display">' + h + ':' + m + '</span><span class="clock__date">';
-            
-            $('.clock .center').html(html);
+            setClock();
 
         }, 1000);
 
