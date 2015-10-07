@@ -1,0 +1,77 @@
+@import "normalize";
+@import "mixins";
+
+body {
+    background-color: "light yellow";
+    color: #333;
+    font-family: "Source Code Pro", monospace;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.alarm-clock {
+    height: 100vh;
+    display: flex;
+}
+
+.weather {
+    flex: 0 0 auto;
+    padding: 40px;
+    line-height: 60px;
+    align-items: center;
+    display: flex;
+    width: 38%;
+
+    &__center {
+
+    }
+
+    &__point {
+        display: flex; 
+        width: 100%;
+    }
+
+    &__hour {
+        flex: 0 0 auto;
+        width: 80px;
+        color: #ccc;
+    }
+
+    &__temperature {
+        flex: 1 1 auto;
+        font-size: 32px;
+    }
+}
+
+.clock {
+    flex: 0 0 auto;
+    width: 62%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 40px;
+
+    &__display {
+        font-family: "avenir", sans-serif;
+        font-weight: 200;
+        font-size: 15rem;
+        display: flex;
+        z-index: 2;
+        letter-spacing: 10px;
+        position: relative;
+    }
+
+    &__seconds {
+        text-align: right;
+        position: fixed;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        border-right: 1px solid blue;
+        z-index: 1;
+    }
+}
