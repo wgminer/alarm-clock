@@ -12,7 +12,8 @@
     "svg-injector": "~1.1.2",
     "angular-cookies": "~1.4.6",
     "normalize": "~1.0.4",
-    "angular-moment": "~0.10.3"
+    "angular-moment": "~0.10.3",
+    "Chart.js": "chartjs#~1.0.2"
   },
-  "appPath": "app",
+  "appPath": "app"
 }

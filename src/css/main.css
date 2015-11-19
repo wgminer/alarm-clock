@@ -355,6 +355,9 @@ th {
 html {
   font-size: 1.25vw; }
 
+* {
+  box-sizing: border-box; }
+
 body {
   font-family: "Helvetica Neue", sans-serif;
   padding: 0;
@@ -375,14 +378,18 @@ a {
   width: 100%; }
 
 .temperature {
+  z-index: 2;
   width: 25%;
   position: absolute;
   left: 0;
-  height: 31%;
   top: 0;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  background-color: #fff;
   text-align: center; }
+  .temperature__inner {
+    padding-bottom: 100%;
+    height: 0; }
   .temperature__number {
     font-size: 6rem;
     font-weight: 300; }
@@ -393,13 +400,18 @@ a {
     display: block; }
 
 .weather {
-  height: 31%;
+  background-color: #fff;
   position: absolute;
-  left: 0;
-  top: 31%;
+  left: 25%;
+  top: 0;
   width: 25%;
-  border-right: 1px solid #ccc;
-  text-align: center; }
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  border-left: 1px solid transparent;
+  z-index: 3; }
+  .weather__inner {
+    padding-bottom: 100%;
+    height: 0; }
   .weather__icon {
     width: 40%;
     margin: 0 auto; }
@@ -411,21 +423,48 @@ a {
     margin-top: 15px; }
 
 .forcast {
-  width: 25%;
-  height: 62%;
+  width: 50%;
   position: absolute;
-  left: 25%;
-  top: 0;
-  border-right: 1px solid #ccc; }
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 1; }
+  .forcast__chart {
+    height: 100%;
+    position: relative; }
+    .forcast__chart:after {
+      content: "";
+      display: table;
+      clear: both; }
+  .forcast__bar {
+    text-align: center;
+    font-size: 12px;
+    float: left;
+    position: relative;
+    color: #999; }
+    .forcast__bar-number {
+      position: absolute;
+      top: 10px;
+      width: 100%;
+      left: 0; }
+    .forcast__bar-time {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      left: 0; }
+  .forcast__rain {
+    color: #1e90ff;
+    font-weight: bold;
+    background-color: rgba(30, 144, 255, 0.1); }
 
-.alarm {
+.news {
   position: absolute;
   left: 0;
   bottom: 0;
   height: 38vh;
   width: 50%;
-  border-right: 1px solid #ccc;
-  border-top: 1px solid #ccc; }
+  border-right: 1px solid #eee;
+  border-top: 1px solid #eee; }
 
 .clock {
   position: absolute;
@@ -433,7 +472,8 @@ a {
   top: 0;
   width: 50%;
   height: 50%;
-  text-align: center; }
+  text-align: center;
+  border-left: 1px solid #eee; }
   .clock__display {
     display: block;
     font-size: 10rem;
@@ -444,13 +484,14 @@ a {
     letter-spacing: 5px;
     font-size: 14px; }
 
-.news {
+.alarm {
   position: absolute;
   right: 0;
   bottom: 0;
   width: 50%;
   height: 50%;
-  border-top: 1px solid #ccc; }
+  border-top: 1px solid #eee;
+  border-left: 1px solid #eee; }
 
 .partly-cloudy {
   position: relative; }
@@ -471,6 +512,9 @@ a {
     right: 0;
     z-index: 2; }
 
+.rain .cloud {
+  background-color: #1e90ff; }
+
 .sun {
   background-color: #ffd700;
   border-radius: 50%;
@@ -488,3 +532,6 @@ a {
     height: 0;
     width: 100%;
     padding-bottom: 100%; }
+
+.night .sun {
+  background-color: #FEFCD7; }

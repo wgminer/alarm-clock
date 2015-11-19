@@ -1,10 +1,14 @@
 @import "normalize";
 @import "mixins";
 
-$border: 1px solid #ccc;
+$border: 1px solid #eee;
 
 html {
     font-size: 1.25vw;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -33,15 +37,20 @@ a {
 }
 
 .temperature {
+    z-index: 2;
     width: 25%;
     position: absolute;
     left: 0;
-    height: 62% * .5;
     top: 0;
     border-right: $border;
     border-bottom: $border;
-    // background-color: orange;
+    background-color: #fff;
     text-align: center;
+
+    &__inner {
+        padding-bottom: 100%;
+        height: 0;
+    }
 
     &__number {
         font-size: 6rem;
@@ -57,15 +66,22 @@ a {
 }
 
 .weather {
-    height: 62% * .5;
+    background-color: #fff;
+    // height: (100% / 3);
     position: absolute;
-    left: 0;
-    top: 62% * .5;
+    left: 25%;
+    top: 0;
     width: 25%;
-    border-right: $border;
     text-align: center;
-    // background-color: pink;
+    border-bottom: $border;
+    border-left: 1px solid transparent;
+    z-index: 3;
     
+    &__inner {
+        padding-bottom: 100%;
+        height: 0;
+    }
+
     &__icon {
         width: 40%;
         margin: 0 auto;
@@ -81,16 +97,49 @@ a {
 }
 
 .forcast {
-    width: 25%;
-    height: 62%;
+    width: 50%;
     position: absolute;
-    left: 25%;
-    top: 0;
-    border-right: $border;
-    // background-color: green;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 1;
+
+    &__chart {
+        @include clearfix;
+        height: 100%;
+        position: relative;
+    }
+
+    &__bar {
+        text-align: center;
+        font-size: 12px;
+        float: left;
+        position: relative;
+        color: #999;
+
+        &-number {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            left: 0;
+        }
+
+        &-time {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            left: 0;
+        }
+    }
+
+    &__rain {
+        color: #1e90ff;
+        font-weight: bold;
+        background-color: rgba(#1e90ff, .1);
+    }
 }
 
-.alarm {
+.news {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -109,6 +158,7 @@ a {
     // background-color: black;
     height: 50%;
     text-align: center;
+    border-left: $border;
 
     &__display {
         display: block;
@@ -124,7 +174,7 @@ a {
     }
 }
 
-.news {
+.alarm {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -132,6 +182,7 @@ a {
     height: 50%;
     // background-color: gray;
     border-top: $border;
+    border-left: $border;
 }
 
 .partly-cloudy {
@@ -160,6 +211,13 @@ a {
     }
 }
 
+.rain {
+
+    .cloud {
+        background-color: #1e90ff;
+    }
+}
+
 .sun {
     background-color: #ffd700;
     border-radius: 50%;
@@ -182,4 +240,8 @@ a {
         width: 100%;
         padding-bottom: 100%;
     }
+}
+
+.night .sun {
+    background-color: #FEFCD7;
 }
