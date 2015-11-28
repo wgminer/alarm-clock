@@ -13,7 +13,7 @@
 * Snooze for 10m
 
 - Nap
-* 30, 60, 120 preset
+* 30, 60, 90, 120 preset
 
 - Music source
 * 

@@ -4,244 +4,235 @@
 $border: 1px solid #eee;
 
 html {
-    font-size: 1.25vw;
-}
+    font-size: 16px;
 
-* {
-    box-sizing: border-box;
+    * {
+        box-sizing: border-box;
+    }
 }
 
 body {
     // background-color: blue;
     // color: #fff;
-    font-family: "Helvetica Neue", sans-serif;
+    font-family: "futura", sans-serif;
     padding: 0;
     margin: 0;
+    color: #333;
 }
 
 a {
+    color: blue;
     text-decoration: none;
-}
 
-.alarm-clock {
-    height: 100vh;
-    position: relative;
+    &:visited {
+        color: blue;
+    }
 }
 
 .center {
     position: absolute;
     top: 50%;
+    display: block;
     left: 50%;
-    transform: translate3D(-50%, -50%, 0);
-    width: 100%;
-}
-
-.temperature {
-    z-index: 2;
-    width: 25%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    border-right: $border;
-    border-bottom: $border;
-    background-color: #fff;
-    text-align: center;
-
-    &__inner {
-        padding-bottom: 100%;
-        height: 0;
-    }
-
-    &__number {
-        font-size: 6rem;
-        font-weight: 300;
-    }
-
-    &__label {
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        font-size: 14px;
-        display: block;
-    }
-}
-
-.weather {
-    background-color: #fff;
-    // height: (100% / 3);
-    position: absolute;
-    left: 25%;
-    top: 0;
-    width: 25%;
-    text-align: center;
-    border-bottom: $border;
-    border-left: 1px solid transparent;
-    z-index: 3;
-    
-    &__inner {
-        padding-bottom: 100%;
-        height: 0;
-    }
-
-    &__icon {
-        width: 40%;
-        margin: 0 auto;
-    }
-
-    &__label {
-        display: block;
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        font-size: 14px;
-        margin-top: 15px;
-    }
-}
-
-.forcast {
-    width: 50%;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    overflow: hidden;
-    z-index: 1;
-
-    &__chart {
-        @include clearfix;
-        height: 100%;
-        position: relative;
-    }
-
-    &__bar {
-        text-align: center;
-        font-size: 12px;
-        float: left;
-        position: relative;
-        color: #999;
-
-        &-number {
-            position: absolute;
-            top: 10px;
-            width: 100%;
-            left: 0;
-        }
-
-        &-time {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            left: 0;
-        }
-    }
-
-    &__rain {
-        color: #1e90ff;
-        font-weight: bold;
-        background-color: rgba(#1e90ff, .1);
-    }
-}
-
-.news {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 38vh;
-    width: 50%;
-    // background-color: red;
-    border-right: $border;
-    border-top: $border;
-}
-
-.clock {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 50%;
-    // background-color: black;
-    height: 50%;
-    text-align: center;
-    border-left: $border;
-
-    &__display {
-        display: block;
-        font-size: 10rem;
-        font-weight: 300;
-    }
-
-    &__date {
-        display: block;
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        font-size: 14px;
-    }
+    transform: translate3d(-50%, -50%, 0);
 }
 
 .alarm {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 50%;
-    height: 50%;
-    // background-color: gray;
-    border-top: $border;
-    border-left: $border;
+
+    &__snooze {
+        font-weight: 300;
+        color: blue;
+        font-size: 4rem;
+        text-align: center;
+        line-height: 62vh;
+        text-transform: uppercase;
+        border: 0;
+        // border-bottom: 1px solid #ccc;
+        display: block;
+        background-color: transparent;
+        padding: 0;
+        width: 100%;
+        margin: 0;
+    }
+
+    &__countdown {
+        font-weight: 300;
+        color: #333;
+        font-size: 4rem;
+        text-align: center;
+        line-height: 62vh;
+        text-transform: uppercase;
+        border: 0;
+        // border-bottom: 1px solid #ccc;
+        display: block;
+        background-color: transparent;
+        padding: 0;
+        width: 100%;
+        margin: 0;
+    }
+
+    &__reset {
+        font-weight: 300;
+        color: blue;
+        font-size: 4rem;
+        text-align: center;
+        line-height: 38vh;
+        text-transform: uppercase;
+        display: block;
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        border: 0;
+    }
 }
 
-.partly-cloudy {
+.status {
     position: relative;
+    z-index: 2;
+
+    &__time {
+        display: block;
+        color: #333;
+        letter-spacing: -4px;
+        font-weight: 300;
+        font-size: 7rem;
+        text-align: center;
+        line-height: 38vh;
+        position: relative;
+
+        small {
+            font-size: 2rem;
+            text-transform: uppercase;
+            line-height: 1;
+            display: block;
+            position: absolute;
+            top: 0;
+        }
+    }
+
+    &__row {
+        @include clearfix;
+        // border-bottom: 1px solid #ccc;
+    }
+
+    &__day {
+        float: left;
+        line-height: 50px;
+        text-align: center;
+        width: (100%) / 7;
+        margin: 0 0 -1px 0;
+        background-color: transparent;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+        border-bottom: 1px solid #ccc;
+
+        &--active {
+            // background-color: rgba(blue, .25);
+            margin-bottom: -6px;
+            color: blue;
+            border-bottom: 5px solid blue;
+        }
+
+        &:first-child {
+            border-right: 0;
+        }
+    }
+}
+
+.nap {
+    position: relative;
+    z-index: 1;
+    @include clearfix;
+
+    &__option {
+        float: left;
+        width: 50%;
+        border: 0;
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        font-size: 2rem;
+        // border-right: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+
+        &:nth-child(even) {
+            border-right: 0;
+        }
+    }
 
     &__inner {
-        height: 0;
-        width: 100%;
+        padding-bottom: 62%;
+    }
+}
+
+.am-pm,
+.minutes,
+.hours {
+    @include clearfix;
+}
+
+.am,
+.pm,
+.minute,
+.hour {
+    float: left;
+    width: 25%;
+    border: 0;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    font-size: 1.5rem;
+    // border-right: 1px solid #ccc;
+    // border-bottom: 1px solid #ccc;
+
+    &:nth-child(4) {
+        margin-right: -1px;
+        // border-right: 0;
+    }
+
+    &__inner {
         padding-bottom: 100%;
     }
 
-    .sun {
-        width: 66%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 1;
-    }
-
-    .cloud {
-        width: 66%;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        z-index: 2;
+    &--active {
+        background-color: rgba(blue, .25);
+        color: blue;
     }
 }
 
-.rain {
+.link {
+    float: left;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-align: center;
+    width: 50%;
+    line-height: 104px;
+}
 
-    .cloud {
-        background-color: #1e90ff;
+.am, .pm {
+    width: 50%;
+
+    &__inner {
+        padding-bottom: 62%;
     }
 }
 
-.sun {
-    background-color: #ffd700;
-    border-radius: 50%;
-    margin: 0 auto;
-
-    &__inner {  
-        height: 0;
-        width: 100%;
-        padding-bottom: 100%;
-    }
-}
-
-.cloud {
-    background-color: #ededed;
-    margin: 0 auto;
-    border-radius: 4px;
-
-    &__inner {  
-        height: 0;
-        width: 100%;
-        padding-bottom: 100%;
-    }
-}
-
-.night .sun {
-    background-color: #FEFCD7;
+.save {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-align: center;
+    width: 50%;
+    line-height: 135px;
+    background-color: transparent;
+    display: block;
+    font-size: 1.5rem;
+    width: 100%;
+    border: 0;
+    padding: 0;
 }

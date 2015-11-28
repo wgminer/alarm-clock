@@ -1,0 +1,60 @@
+.hours
+    .hour(ng-class="{ 'hour--active': localAlarm.time.hour == 1 || localAlarm.time.hour == 13 }", ng-click="localAlarm.time.hour = 1")
+        span.center 1
+        .hour__inner
+    .hour(ng-class="{ 'hour--active': localAlarm.time.hour == 2 || localAlarm.time.hour == 14  }", ng-click="localAlarm.time.hour = 2")
+        span.center 2
+        .hour__inner
+    .hour(ng-class="{ 'hour--active': localAlarm.time.hour == 3 || localAlarm.time.hour == 15 }", ng-click="localAlarm.time.hour = 3")
+        span.center 3
+        .hour__inner
+    .hour(ng-class="{ 'hour--active': localAlarm.time.hour == 4 || localAlarm.time.hour == 16 }", ng-click="localAlarm.time.hour = 4")
+        span.center 4
+        .hour__inner
+    .hour(ng-class="{ 'hour--active': localAlarm.time.hour == 5 || localAlarm.time.hour == 17 }", ng-click="localAlarm.time.hour = 5")
+        span.center 5
+        .hour__inner
+    .hour(ng-class="{ 'hour--active': localAlarm.time.hour == 6 || localAlarm.time.hour == 18 }", ng-click="localAlarm.time.hour = 6")
+        span.center 6
+        .hour__inner
+    .hour(ng-class="{ 'hour--active': localAlarm.time.hour == 7 || localAlarm.time.hour == 19 }", ng-click="localAlarm.time.hour = 7")
+        span.center 7
+        .hour__inner
+    .hour(ng-class="{ 'hour--active': localAlarm.time.hour == 8 || localAlarm.time.hour == 20 }", ng-click="localAlarm.time.hour = 8")
+        span.center 8
+        .hour__inner
+    .hour(ng-class="{ 'hour--active': localAlarm.time.hour == 9 || localAlarm.time.hour == 21 }", ng-click="localAlarm.time.hour = 9")
+        span.center 9
+        .hour__inner
+    .hour(ng-class="{ 'hour--active': localAlarm.time.hour == 10 || localAlarm.time.hour == 22 }", ng-click="localAlarm.time.hour = 10")
+        span.center 10
+        .hour__inner
+    .hour(ng-class="{ 'hour--active': localAlarm.time.hour == 11 || localAlarm.time.hour == 23 }", ng-click="localAlarm.time.hour = 11")
+        span.center 11
+        .hour__inner
+    .hour(ng-class="{ 'hour--active': localAlarm.time.hour == 12 || localAlarm.time.hour == 0 }", ng-click="localAlarm.time.hour = 12")
+        span.center 12
+        .hour__inner
+
+.minutes
+    .minute(ng-class="{ 'minute--active': localAlarm.time.minute == 00 }", ng-click="localAlarm.time.minute = 00")
+        span.center 00
+        .minute__inner
+    .minute(ng-class="{ 'minute--active': localAlarm.time.minute == 15 }", ng-click="localAlarm.time.minute = 15")
+        span.center 15
+        .minute__inner
+    .minute(ng-class="{ 'minute--active': localAlarm.time.minute == 30 }", ng-click="localAlarm.time.minute = 30")
+        span.center 30
+        .minute__inner
+    .minute(ng-class="{ 'minute--active': localAlarm.time.minute == 45 }", ng-click="localAlarm.time.minute = 45")
+        span.center 45
+        .hour__inner
+.am-pm
+    .am(ng-class="{ 'am--active': localAlarm.meridian == 'am' }", ng-click="localAlarm.meridian = 'am'")
+        span.center AM
+        .am__inner
+    .pm(ng-class="{ 'pm--active': localAlarm.meridian == 'pm' }", ng-click="localAlarm.meridian = 'pm'")
+        span.center PM
+        .pm__inner
+
+button.save(ng-click="setAlarm()") Set Alarm

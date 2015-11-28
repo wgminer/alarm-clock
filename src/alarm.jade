@@ -1,0 +1,28 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        title Alarm Clock
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+        script(src='https://cdn.firebase.com/js/client/2.3.1/firebase.js')
+        script(src='//www.youtube.com/iframe_api')
+        script(src='//connect.soundcloud.com/sdk.js')
+        script(src='//w.soundcloud.com/player/api.js')
+
+    body
+        button#test.btn.btn-default Test Alarm
+        button#snooze.btn.btn-default Snooze
+        button#silence.btn.btn-default Silence
+        button#play.btn.btn-default Play
+        #player
+
+        <!-- build:js(.) js/vendor.js -->
+        script(src='libs/jquery/dist/jquery.js')
+        script(src='libs/lodash/lodash.js')
+        <!-- endbuild -->
+
+        <!-- build:js({.tmp,dev}) js/scripts.js -->
+        script(src='js/alarm.js')
+        <!-- endbuild -->

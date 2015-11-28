@@ -1,0 +1,30 @@
+.container
+    .alarm(ng-show="alarm.sounding || alarm.napping ")
+        button.alarm__snooze(ng-show="alarm.sounding", ng-click="startNap(10)") Snooze
+        .alarm__countdown(ng-show="alarm.napping") {{ napTimeLeft }}
+        button.alarm__reset(ng-click="resetAlarm()") Reset
+    .status(ng-hide="alarm.sounding || alarm.napping ")
+        .status__time(href="#/set-time") {{ alarm.time.hour }}:{{ alarm.time.minute == 0 ? '00' : alarm.time.minute }}
+        .status__row
+            button.status__day(ng-click="toggleDay('sunday')", ng-class="{ 'status__day--active': alarm.days.sunday }") Su
+            button.status__day(ng-click="toggleDay('monday')", ng-class="{ 'status__day--active': alarm.days.monday }") M
+            button.status__day(ng-click="toggleDay('tuesday')", ng-class="{ 'status__day--active': alarm.days.tuesday }") T
+            button.status__day(ng-click="toggleDay('wednesday')", ng-class="{ 'status__day--active': alarm.days.wednesday }") W
+            button.status__day(ng-click="toggleDay('thursday')", ng-class="{ 'status__day--active': alarm.days.thursday }") Th
+            button.status__day(ng-click="toggleDay('friday')", ng-class="{ 'status__day--active': alarm.days.friday }") F
+            button.status__day(ng-click="toggleDay('saturday')", ng-class="{ 'status__day--active': alarm.days.saturday }") Sa  
+    .nap(ng-hide="alarm.sounding || alarm.napping")
+        button.nap__option(ng-click="startNap(30)")
+            .nap__inner
+            span.center 30
+        button.nap__option.nap__option--no-border(ng-click="startNap(60)")
+            .nap__inner
+            span.center 60
+        button.nap__option(ng-click="startNap(90)")
+            .nap__inner
+            span.center 90
+        button.nap__option.nap__option--no-border(ng-click="startNap(120)")
+            .nap__inner
+            span.center 120
+    a.link(href="#/set-playlist") Playlist
+    a.link(href="#/set-alarm") Alarm
