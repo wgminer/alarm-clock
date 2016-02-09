@@ -3,3 +3,4 @@ libs
 dist
 .DS_Store
 secrets.json
+build
