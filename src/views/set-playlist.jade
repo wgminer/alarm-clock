@@ -1,3 +1,12 @@
 .playlist
-    .playlist__item(ng-repeat="song in playlist")
-        {{ song.title }}
+	.item.playlist__item(playlist-item, ng-repeat="song in playlist")
+		.item__title {{ song.title }}
+		.item__remove(ng-click="remove()")
+			i.ion-close
+
+	.playlist__actions
+		form.playlist__form(playlist-form, novalidate, ng-submit="submit(url)")
+			input.playlist__input(ng-model="url")
+			button.playlist__button 
+				i.ion-plus
+		a.playlist__save(href="#/") Set Playlist

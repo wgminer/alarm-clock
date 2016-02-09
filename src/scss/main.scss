@@ -1,7 +1,7 @@
 @import "normalize";
 @import "mixins";
 
-$border: 1px solid #eee;
+$border: 1px solid #ccc;
 
 html {
     font-size: 16px;
@@ -94,9 +94,9 @@ a {
     &__time {
         display: block;
         color: #333;
-        letter-spacing: -4px;
+        letter-spacing: -3px;
         font-weight: 300;
-        font-size: 7rem;
+        font-size: 5rem;
         text-align: center;
         line-height: 38vh;
         position: relative;
@@ -105,15 +105,13 @@ a {
             font-size: 2rem;
             text-transform: uppercase;
             line-height: 1;
-            display: block;
-            position: absolute;
-            top: 0;
+            letter-spacing: -1px;
+            margin-left: -1rem;
         }
     }
 
     &__row {
         @include clearfix;
-        // border-bottom: 1px solid #ccc;
     }
 
     &__day {
@@ -171,6 +169,7 @@ a {
 .am-pm,
 .minutes,
 .hours {
+    border-bottom: $border;
     @include clearfix;
 }
 
@@ -227,12 +226,92 @@ a {
     text-transform: uppercase;
     letter-spacing: 4px;
     text-align: center;
-    width: 50%;
-    line-height: 135px;
+    line-height: 132px;
     background-color: transparent;
     display: block;
     font-size: 1.5rem;
     width: 100%;
     border: 0;
     padding: 0;
+
+    &--fixed {
+        position: fixed;
+        bottom: 0;
+        border-top: $border;
+    }
+}
+
+.item {
+    display: block;
+    width: 100%;
+    display: flex;
+    border-bottom: $border;
+
+    &__title {
+        @include ellipsis;
+        padding: 0 1rem;
+        line-height: 3rem;
+        flex: 1 1 auto;
+    }
+
+    &__remove {
+        width: 3rem;
+        line-height: 3rem;
+        text-align: center;
+        flex: 0 0 auto;
+        color: #ccc;
+    }
+}
+
+.playlist {
+
+    &__actions {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+    
+    &__form {
+        display: flex;
+        border-top: $border;
+        border-bottom: $border;
+    }
+
+    &__input {
+        flex: 1 1 auto;
+        display: block;
+        line-height: 3rem;
+        height: 3rem;
+        border: 0;
+        padding: 0 1rem;
+    }
+
+    &__button {
+        width: 3rem;
+        flex: 0 0 auto;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        background-color: transparent;
+
+        i {
+            line-height: 1;
+        }
+    }
+
+    &__save {
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        text-align: center;
+        line-height: 8rem;
+        background-color: transparent;
+        display: block;
+        font-size: 1.5rem;
+        width: 100%;
+        border: 0;
+        padding: 0;
+        color: #333;
+    }
 }

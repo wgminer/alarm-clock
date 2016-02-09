@@ -3,8 +3,11 @@ html(ng-app="alarmClock")
     head
         meta(charset="utf-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        title Alarm Clock
         meta(name="viewport", content="width=device-width, initial-scale=1")
+        meta(name="apple-mobile-web-app-capable", content="yes")
+        meta(name="apple-mobile-web-app-status-bar-style", content="white")
+        title Alarm Clock
+        link(rel="stylesheet", href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css")
         link(rel="stylesheet", href="css/main.css")  
     body
 
@@ -15,14 +18,15 @@ html(ng-app="alarmClock")
         script(src="//connect.soundcloud.com/sdk.js")
         script(src="//w.soundcloud.com/player/api.js")
 
-        <!-- build:js(.) js/vendor.js -->
-        script(src="libs/jquery/dist/jquery.js")
-        script(src="libs/lodash/lodash.js")
-        script(src="libs/angular/angular.js")
-        script(src="libs/angular-route/angular-route.js")
-        script(src="libs/angularfire/dist/angularfire.js")
-        <!-- endbuild -->
+        //- build:js js/libs.js
+        script(src="../libs/jquery/dist/jquery.js")
+        script(src="../libs/lodash/lodash.js")
+        script(src="../libs/angular/angular.js")
+        script(src="../libs/angular-route/angular-route.js")
+        script(src="../libs/angular-touch/angular-touch.js")
+        script(src="../libs/angularfire/dist/angularfire.js")
+        //- endbuild
 
-        <!-- build:js({.tmp,dev}) js/scripts.js -->
+        //- build:js js/scripts.js
         script(src="js/app.js")
-        <!-- endbuild -->
+        //- endbuild

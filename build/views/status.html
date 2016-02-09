@@ -1,1 +1,34 @@
-<div class="container"><div ng-show="alarm.sounding || alarm.napping " class="alarm"><button ng-show="alarm.sounding" ng-click="startNap(10)" class="alarm__snooze">Snooze</button><div ng-show="alarm.napping" class="alarm__countdown">{{ napTimeLeft }}</div><button ng-click="resetAlarm()" class="alarm__reset">Reset</button></div><div ng-hide="alarm.sounding || alarm.napping " class="status"><div href="#/set-time" class="status__time">{{ alarm.time.hour }}:{{ alarm.time.minute == 0 ? '00' : alarm.time.minute }}</div><div class="status__row"><button ng-click="toggleDay('sunday')" ng-class="{ 'status__day--active': alarm.days.sunday }" class="status__day">Su</button><button ng-click="toggleDay('monday')" ng-class="{ 'status__day--active': alarm.days.monday }" class="status__day">M</button><button ng-click="toggleDay('tuesday')" ng-class="{ 'status__day--active': alarm.days.tuesday }" class="status__day">T</button><button ng-click="toggleDay('wednesday')" ng-class="{ 'status__day--active': alarm.days.wednesday }" class="status__day">W</button><button ng-click="toggleDay('thursday')" ng-class="{ 'status__day--active': alarm.days.thursday }" class="status__day">Th</button><button ng-click="toggleDay('friday')" ng-class="{ 'status__day--active': alarm.days.friday }" class="status__day">F</button><button ng-click="toggleDay('saturday')" ng-class="{ 'status__day--active': alarm.days.saturday }" class="status__day">Sa  </button></div></div><div ng-hide="alarm.sounding || alarm.napping" class="nap"><button ng-click="startNap(30)" class="nap__option"><div class="nap__inner"></div><span class="center">30</span></button><button ng-click="startNap(60)" class="nap__option nap__option--no-border"><div class="nap__inner"></div><span class="center">60</span></button><button ng-click="startNap(90)" class="nap__option"><div class="nap__inner"></div><span class="center">90</span></button><button ng-click="startNap(120)" class="nap__option nap__option--no-border"><div class="nap__inner"></div><span class="center">120</span></button></div><a href="#/set-playlist" class="link">Playlist</a><a href="#/set-alarm" class="link">Alarm</a></div>
+
+<div class="container">
+  <div ng-show="alarm.sounding || alarm.napping " class="alarm">
+    <button ng-show="alarm.sounding" ng-click="startNap(10)" class="alarm__snooze">Snooze</button>
+    <div ng-show="alarm.napping" class="alarm__countdown">{{ napTimeLeft }}</div>
+    <button ng-click="resetAlarm()" class="alarm__reset">Reset</button>
+  </div>
+  <div ng-hide="alarm.sounding || alarm.napping " class="status">
+    <div href="#/set-time" class="status__time">{{ alarm.time.hour == 0 ? '12' : alarm.time.hour }}:{{ alarm.time.minute == 0 ? '00' : alarm.time.minute }} <small>{{ alarm.time.meridian }}</small></div>
+    <div class="status__row">
+      <button ng-click="toggleDay('sunday')" ng-class="{ 'status__day--active': alarm.days.sunday }" class="status__day">Su</button>
+      <button ng-click="toggleDay('monday')" ng-class="{ 'status__day--active': alarm.days.monday }" class="status__day">M</button>
+      <button ng-click="toggleDay('tuesday')" ng-class="{ 'status__day--active': alarm.days.tuesday }" class="status__day">T</button>
+      <button ng-click="toggleDay('wednesday')" ng-class="{ 'status__day--active': alarm.days.wednesday }" class="status__day">W</button>
+      <button ng-click="toggleDay('thursday')" ng-class="{ 'status__day--active': alarm.days.thursday }" class="status__day">Th</button>
+      <button ng-click="toggleDay('friday')" ng-class="{ 'status__day--active': alarm.days.friday }" class="status__day">F</button>
+      <button ng-click="toggleDay('saturday')" ng-class="{ 'status__day--active': alarm.days.saturday }" class="status__day">Sa  </button>
+    </div>
+  </div>
+  <div ng-hide="alarm.sounding || alarm.napping" class="nap">
+    <button ng-click="startNap(30)" class="nap__option">
+      <div class="nap__inner"></div><span class="center">30</span>
+    </button>
+    <button ng-click="startNap(60)" class="nap__option nap__option--no-border">
+      <div class="nap__inner"></div><span class="center">60</span>
+    </button>
+    <button ng-click="startNap(90)" class="nap__option">
+      <div class="nap__inner"></div><span class="center">90</span>
+    </button>
+    <button ng-click="startNap(120)" class="nap__option nap__option--no-border">
+      <div class="nap__inner"></div><span class="center">120</span>
+    </button>
+  </div><a href="#/set-playlist" class="link">Playlist</a><a href="#/set-alarm" class="link">Alarm</a>
+</div>

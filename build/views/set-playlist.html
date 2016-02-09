@@ -1,1 +1,13 @@
-<div class="playlist"><div ng-repeat="song in playlist" class="playlist__item">{{ song.title }}</div></div>
+
+<div class="playlist">
+  <div playlist-item="playlist-item" ng-repeat="song in playlist" class="item playlist__item">
+    <div class="item__title">{{ song.title }}</div>
+    <div ng-click="remove()" class="item__remove"><i class="ion-close"></i></div>
+  </div>
+  <div class="playlist__actions">
+    <form playlist-form="playlist-form" novalidate="novalidate" ng-submit="submit(url)" class="playlist__form">
+      <input ng-model="url" class="playlist__input"/>
+      <button class="playlist__button"> <i class="ion-plus"></i></button>
+    </form><a href="#/" class="playlist__save">Set Playlist</a>
+  </div>
+</div>

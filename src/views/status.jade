@@ -4,7 +4,7 @@
         .alarm__countdown(ng-show="alarm.napping") {{ napTimeLeft }}
         button.alarm__reset(ng-click="resetAlarm()") Reset
     .status(ng-hide="alarm.sounding || alarm.napping ")
-        .status__time(href="#/set-time") {{ alarm.time.hour }}:{{ alarm.time.minute == 0 ? '00' : alarm.time.minute }}
+        .status__time(href="#/set-time") {{ alarm.time.hour == 0 ? '12' : alarm.time.hour }}:{{ alarm.time.minute == 0 ? '00' : alarm.time.minute }} <small>{{ alarm.time.meridian }}</small>
         .status__row
             button.status__day(ng-click="toggleDay('sunday')", ng-class="{ 'status__day--active': alarm.days.sunday }") Su
             button.status__day(ng-click="toggleDay('monday')", ng-class="{ 'status__day--active': alarm.days.monday }") M

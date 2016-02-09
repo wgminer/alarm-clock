@@ -18,11 +18,11 @@ html
         button#play.btn.btn-default Play
         #player
 
-        <!-- build:js(.) js/vendor.js -->
+        //- build:js(.) js/libs.js
         script(src='libs/jquery/dist/jquery.js')
         script(src='libs/lodash/lodash.js')
-        <!-- endbuild -->
+        //- endbuild
 
-        <!-- build:js({.tmp,dev}) js/scripts.js -->
+        //- build:js(./src) js/scripts.js
         script(src='js/alarm.js')
-        <!-- endbuild -->
+        //- endbuild

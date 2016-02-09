@@ -27,84 +27,86 @@ var Player = function () {
         $('iframe').remove();
     }
 
-    module.play = function (index) {
+    var create = function (playlist, index) {
+
+        $('iframe').remove();
+        var song = playlist[index];
+
+        if (song.source == 'youtube') {
+
+            var $sacrifice = $('<div id="sacrifice"></div>');
+            $player.prepend($sacrifice);
+
+            var player = new YT.Player('sacrifice', {
+                videoId: song.source_id,
+                playerVars: {
+                    wmode: 'opaque',
+                    showinfo: 0,
+                    modestbranding: 1
+                },
+                events: {
+                    onReady: function (event) {
+                        event.target.playVideo();
+                    },
+                    onStateChange: function (event) {
+                        player.status = event.data;
+                        if (event.data == 0) {
+                            index++;
+                            if (playlist[index]) {
+                                create(playlist, index);
+                            } else {
+                                create(playlist, 0);
+                            }
+                        }
+                    }
+                }
+            });
+            
+        } else if (song.source == 'soundcloud') {
+
+            var params = {
+                show_comments: false,
+                auto_play: true
+            }
+
+            SC.oEmbed(song.source_url, params, function(oembed){
+
+                $player.prepend(oembed.html);
+
+                player = SC.Widget($player.children()[0]);
+
+                scope.player.bind(SC.Widget.Events.FINISH, function(eventData) {
+                    index++;
+                    if (playlist[index]) {
+                        create(playlist, index);
+                    } else {
+                        create(playlist, 0);
+                    }
+                });
+
+            });
+        }
+    }
+
+    module.play = function (shuffle) {
 
         ref.once('value', function(snapshot) {
 
             var player = snapshot.val();
-            if (typeof index === 'undefined') {
-                var index = _.random(0, player.playlist.length - 1);
+
+            if (shuffle === true) {
+                var playlist = _.shuffle(player.playlist);
+            } else {
+                var playlist = player.playlist;
             }
 
-            var song = player.playlist[index];
+            create(playlist, 0);
 
-            if (song.source == 'youtube') {
-
-                var $sacrifice = $('<div id="sacrifice"></div>');
-                $player.prepend($sacrifice);
-
-                var player = new YT.Player('sacrifice', {
-                    videoId: song.source_id,
-                    playerVars: {
-                        wmode: 'opaque',
-                        showinfo: 0,
-                        modestbranding: 1
-                    },
-                    events: {
-                        onReady: function (event) {
-                            event.target.playVideo();
-                        },
-                        onStateChange: function (event) {
-                            player.status = event.data;
-                            console.log(player.status);
-                        }
-                    }
-                });
-                
-            } else if (song.source == 'soundcloud') {
-
-                var params = {
-                    show_comments: false,
-                    auto_play: true
-                }
-
-                SC.oEmbed(song.source_url, params, function(oembed){
-
-                    $player.prepend(oembed.html);
-
-                    player = SC.Widget($player.children()[0]);
-
-                    player.source = song.source;
-                    player.source_id = song.source_id;
-                    player.source_url = song.source_url;
-
-                    player.status = 0;
-
-                    player.bind(SC.Widget.Events.READY, function(eventData) {
-                        setTimeout(function(){
-                            if (seekTo > 0) {
-                                player.seekTo(seekTo);
-                            }
-                        }, 1000);
-                    });
-
-                    player.bind(SC.Widget.Events.PLAY, function(eventData) {
-                        player.status = 1;
-                        console.log(player.status);
-                    });
-
-                    player.bind(SC.Widget.Events.PAUSE, function(eventData) {
-                        player.status = 2;
-                        console.log(player.status);
-                    });
-
-                });
-            }
         });
     }
     
     module.init = function (playerDatabase) {
-        ref = playerDatabase;
+        ref = playerDatabase.child('player');
     }
 
     return module;
@@ -117,6 +119,9 @@ var Alarm = (function () {
     var sound;
     var database;
     var checkAlarmInterval;
+
+    var alarmRef;
+    var playerRef;
 
     var getDayStr = function () {
 
@@ -153,9 +158,13 @@ var Alarm = (function () {
         // and it's on an active day
         // ...then we're past the alarm
 
+        if (alarm.time.meridian == 'pm') {
+            alarm.time.hour += 12;
+        }
+
         var time = alarm.time.hour * 100 + alarm.time.minute;
 
-        if (currently > time  && alarm.days[getDayStr()]) {
+        if (currently >= time  && alarm.days[getDayStr()]) {
             return true;
         } else {
             return false;
@@ -175,44 +184,31 @@ var Alarm = (function () {
 
         ref.once('value', function(snapshot) {
 
-            var alarm = snapshot.val();
+            var alarm = snapshot.val().alarm;
+            var player = snapshot.val().player;
 
             // If we're taking a nap 
             // and it's time to wake up
-            // OR
-            // and it's a day and time when the alarm should be on
-            // and the alarm hasn't already sounded that day
             if (alarm.napping && Date.now() > alarm.nap_end) {
                 console.log('playing nap', Date.now(), alarm.nap_end);
-                ref.update({
+                ref.child('alarm').update({
                     sounding: true,
                     napping: false
                 });
-                Player.play();
+                Player.play(player.shuffle);
                 return false;
             }
 
-            if (hasAlarmSounded(alarm) == false && hasAlarmPast(alarm)) {
-                console.log('playing regular');
-                ref.update({
+            // It's a day and time when the alarm should be on
+            // and the alarm hasn't already sounded that day
+            if (hasAlarmPast(alarm) && hasAlarmSounded(alarm) == false) {
+                ref.child('alarm').update({
                     sounding: true,
                     last_sound: dateStr()
                 });
-                Player.play();
+                Player.play(player.shuffle);
                 return false;
             }
-
-            
-            // and the alarm is on 
-            
-            // and the alarm isn't currently sounding
-            // console.log('is not napping?: ' + (alarm.napping === false));
-            // console.log('armed?: ' + alarm.armed);
-            // console.log('past alarm time?: ' + hasAlarmPast(alarm));
-            // console.log('has not sounded?: ' + (hasAlarmSounded(alarm) == false));
-            // console.log('is not currently sounding?: ' + (alarm.sounding == false));
-
-                    
 
         });
     }
@@ -233,18 +229,21 @@ var Alarm = (function () {
 
     module.init = function (ref) {
 
+        alarmRef = ref.child('alarm');
+        playerRef = ref.child('player');
+
         // When loading page for the first time
-        ref.once('value', function(snapshot) {
+        alarmRef.once('value', function(snapshot) {
             var alarm = snapshot.val();
             if (hasAlarmPast(alarm)) {
-                ref.update({
+                alarmRef.update({
                     last_sound: dateStr()
                 });
             }
         });
 
         // Do stuff on change
-        ref.on('value', function(snapshot) {
+        alarmRef.on('value', function(snapshot) {
             var alarm = snapshot.val();
             if (alarm.sounding == false) {
                 Player.stop();
@@ -262,8 +261,6 @@ var Alarm = (function () {
 
 var ref = new Firebase('https://alarm-clock.firebaseio.com/');
 
-var alarmRef = ref.child('alarm');
-var playerRef = ref.child('player');
 var database = {
     alarm: {
         armed: true, // Is alarm ON or OFF
@@ -273,7 +270,8 @@ var database = {
         nap_end: "", // Timestamp for when nap will end
         time: {
             hour: 8,
-            minute: 30
+            minute: 30,
+            meridian: 'am'
         },
         days: {
             sunday: false,
@@ -287,8 +285,7 @@ var database = {
     },
     player: {
         playing: false,
-        next: false,
-        prev: false,
+        shuffle: true,
         playlist: [
             {
                 source: "youtube",
@@ -315,8 +312,8 @@ var database = {
 
 $(function () {
 
-    Player.init(playerRef);
-    Alarm.init(alarmRef);
+    Player.init(ref);
+    Alarm.init(ref);
     
 
     $('#test').click(function () {
@@ -329,11 +326,11 @@ $(function () {
     });
 
     $('#silence').click(function () {
-        Alarm.silence();
+        Player.stop();
     });
 
     $('#play').click(function () {
-        Player.play();
+        Player.play(true);
     });
 
 });
