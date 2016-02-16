@@ -10,10 +10,20 @@ html
 		
 		button(id="reset") Reset
 		button(id="snooze") Snooze
-
+		hr
 		div
 			input(type="time", id="time")
 			button(id="set") Set Alarm
+		hr
+		div
+			input(type="text", id="song")
+			button(id="add") Add Song
+		hr
+		div#player
+
+		script(src="//www.youtube.com/iframe_api")
+		script(src="//connect.soundcloud.com/sdk.js")
+		script(src="//w.soundcloud.com/player/api.js")
 
 		//- build:js(.) js/vendor.js
 		script(src="libs/jquery/dist/jquery.js")

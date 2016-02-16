@@ -6,6 +6,7 @@ var data = {
 	},
 	"playlist": ["7_4eurYk9_Q"],
 	"config": {
-		"snoozeDuration": 10
+		"snoozeDuration": 10,
+		"shuffle": true
 	}
 }
