@@ -1,0 +1,26 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		title Alarm
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		link(rel="stylesheet", href="css/alarm-clock.css")
+	body
+		
+		div#player
+
+		script(src="//www.youtube.com/iframe_api")
+		script(src="//connect.soundcloud.com/sdk.js")
+		script(src="//w.soundcloud.com/player/api.js")
+
+		//- build:js(.) js/vendor.js
+		script(src="libs/jquery/dist/jquery.js")
+		script(src="libs/lodash/lodash.js")
+		script(src="libs/firebase/firebase.js")
+		script(src="libs/moment/moment.js")
+		//- endbuild
+
+		//- build:js({.tmp,dev}) js/scripts.js
+		script(src="js/alarm.js")
+		//- endbuild

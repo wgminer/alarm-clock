@@ -1,9 +1,11 @@
 'use strict';
 
-(function () {
+var Alarm = (function () {
 
-	var ref = new Firebase('https://alarm-clock.firebaseio.com');
+	var url = 'https://alarm-clock.firebaseio.com/.json';
 	var loop, isAlarmSounding;
+
+	var module = {};
 
 	var player = function (playlist, shuffle, index) {
 
@@ -74,40 +76,43 @@
 	    }
 	}
 
-	ref.on('value', function(snapshot) {
-
-		var alarm = snapshot.val().alarm;
-		var playlist = snapshot.val().playlist;
-		var config = snapshot.val().config;
+	module.init = function () {
 
 		clearInterval(loop);
 		loop = setInterval(function () {
 
-			if (Date.now() > alarm.next) {
-				console.log('alarm!', alarm);
+			$.get(url).done(function (data) {
 
-				if (!isAlarmSounding) {
-					isAlarmSounding = true;
-					player(playlist, config.shuffle, 0);
-				}
+				if (Date.now() > data.alarm.next) {
+					console.log('alarm!', data.alarm);
 
-				if (alarm.snoozed) {
+					if (!isAlarmSounding) {
+						isAlarmSounding = true;
+						player(data.playlist, data.config.shuffle, 0);
+					}
+
+					if (data.alarm.snoozed) {
+						data.alarm.snoozed = false;
+						$.ajax({
+							url: url, 
+							type: 'PUT',
+							data: JSON.stringify(data)
+						});
+					}
+
+				} else {
 					$('iframe').remove();
-					alarm.snoozed = false;
-					ref.child('alarm/snoozed').set(alarm.snoozed);
+					isAlarmSounding = false;
+					data.alarm.snoozed = false;
+					console.log(Math.round((data.alarm.next - Date.now()) / 1000) + 's until next alarm');
 				}
-
-			} else {
-				$('iframe').remove();
-				isAlarmSounding = false;
-				alarm.snoozed = false;
-				console.log(Math.round((alarm.next - Date.now()) / 1000) + 's until next alarm');
-			}
+			});
 
 		}, 1000);
+	}
 
-	}, function (errorObject) {
-		console.log('The read failed: ' + errorObject.code);
-	});
+	return module;
 
 })();
+
+Alarm.init();
