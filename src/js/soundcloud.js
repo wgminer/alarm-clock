@@ -12,6 +12,8 @@ var SoundCloud = (function() {
 
         SC.get('/resolve', { url: url }, function(data) {
 
+            console.log(data);
+
             if (data.embeddable_by != 'me') {
 
                 var newSong = {
@@ -24,12 +26,12 @@ var SoundCloud = (function() {
                 deferred.resolve(newSong);
 
             } else {
-                deferred.resolve(false);
+                deferred.reject(false);
             }
 
         });
 
-        return deferred.promise;
+        return deferred.promise();
 
     }
 

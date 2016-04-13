@@ -1,10 +1,10 @@
-var data = {
+{
 	"alarm": {
-		"time": "800", // timestamp
+		"time": "800",
 		"next": "",
 		"snoozed": false
 	},
-	"playlist": ["7_4eurYk9_Q"],
+	"playlist": [],
 	"config": {
 		"snoozeDuration": 10,
 		"shuffle": true

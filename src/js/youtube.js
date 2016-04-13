@@ -1,4 +1,4 @@
-var SoundCloud = (function() {
+var YouTube = (function() {
 
     var ytAPIKey = 'AIzaSyCkoszshUaUgV-2CrviQI0I4pTkd8j61gc';
     var module = {};
@@ -36,7 +36,7 @@ var SoundCloud = (function() {
                 deferred.reject();
             });
 
-        return deferred.promise;
+        return deferred.promise();
 
     }
 

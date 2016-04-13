@@ -19,21 +19,11 @@ html
 			input(type="text", id="song")
 			button(id="add") Add Song
 		hr
-		div#player
+		ol#playlist
 
 		script(src="//www.youtube.com/iframe_api")
 		script(src="//connect.soundcloud.com/sdk.js")
 		script(src="//w.soundcloud.com/player/api.js")
 
-		//- build:js(.) js/vendor.js
-		script(src="libs/jquery/dist/jquery.js")
-		script(src="libs/lodash/lodash.js")
-		script(src="libs/firebase/firebase.js")
-		script(src="libs/moment/moment.js")
-		//- endbuild
-
-		//- build:js({.tmp,dev}) js/scripts.js
-		script(src="js/youtube.js")
-		script(src="js/soundcloud.js")
+		script(src="js/vendor.js")
 		script(src="js/app.js")
-		//- endbuild
